@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+      "target": "https://eulefunction.azurewebsites.net/api/face_recognition_http_trigger?code=IEYyZJZgMEe5RA8proyQuYnu36nHyR04xOiWCoGhja0FjI//PBFg6A==",
+      "secure": false,
+      "logLevel": "debug"
+  }
+}

@@ -1,0 +1,44 @@
+version: 0.0  
+os: linux  
+# Make sure that the user exists on the machine  
+files:  
+  - source: /  
+    destination: /tmp/CodeDeploy/frontend/
+permissions:  
+  - object: /tmp/CodeDeploy/frontend/
+    pattern: "**"
+    owner: ubuntu
+    group: root 
+    mode: 755
+    type:
+      - directory
+  - object: /tmp/CodeDeploy/frontend/
+    pattern: "**"  
+    owner: ubuntu
+    group: root  
+    mode: 664  
+    type:  
+      - file
+hooks: 
+   BeforeInstall: 
+     - location: deploy-scripts/01-serviceStop.sh
+       timeout: 60
+       runas: root
+   AfterInstall:
+     - location: deploy-scripts/10-loggingPrep.sh
+       timeout: 5
+     - location: deploy-scripts/11-moveFiles.sh
+       timeout: 15
+     - location: deploy-scripts/12-build.sh
+       timeout: 240
+       runas: ubuntu       
+     - location: deploy-scripts/13-serviceCheckEnable.sh
+       timeout: 5
+       runas: root
+#     - location: deploy-scripts/14-loadAppConfig.sh
+#       timeout: 10
+#       runas: root
+   ApplicationStart:
+     - location: deploy-scripts/15-serviceStart.sh
+       timeout: 60
+       runas: root

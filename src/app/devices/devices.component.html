@@ -1,0 +1,30 @@
+  
+    <div class="card">
+      <div class="card-header bg-dark text-white ">
+        <h5 class="mb-0">
+          Choose your Device:
+        </h5>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="input-group" style="margin-top: 0.4cm;">
+            <input type="text" class="form-control" id="device_id" placeholder="Device ID" #device_id />
+
+            <div class="input-group-append">
+              <button [disabled]="responsePending" tooltip="Create Device" type="submit"
+                class="btn btn-primary" (click)="createDevice(device_id.value)"
+                title="Creates a device, and gives back errorcode if the device already exists.">
+                Create
+              </button>
+              <button class="btn btn-secondary" (click)="goToModel(device_id.value)" type="button"
+                title="Creates a device, and gives back errorcode if the device already exists.">
+                Edit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container-sm" style="padding: 20px;">
+    </div>
+    <app-home></app-home>
